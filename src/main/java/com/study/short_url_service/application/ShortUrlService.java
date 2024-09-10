@@ -4,6 +4,7 @@ import com.study.short_url_service.domain.ShortUrl;
 import com.study.short_url_service.domain.ShortUrlRepository;
 import com.study.short_url_service.presentation.ShortUrlCreationRequestDTO;
 import com.study.short_url_service.presentation.ShortUrlCreationResponseDTO;
+import com.study.short_url_service.presentation.ShortUrlDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,13 @@ public class ShortUrlService {
         shortUrlRepository.save(shortUrl);
 
         return originalUrl;
+    }
+
+    public ShortUrlDTO fetchShortUrlInformation(String shortUrlKey) {
+        ShortUrl shortUrl = shortUrlRepository.find(shortUrlKey);
+
+        ShortUrlDTO shortUrlDTO = new ShortUrlDTO(shortUrl);
+
+        return shortUrlDTO;
     }
 }

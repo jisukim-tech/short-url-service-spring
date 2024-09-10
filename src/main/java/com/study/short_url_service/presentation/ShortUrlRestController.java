@@ -38,4 +38,12 @@ public class ShortUrlRestController {
         httpHeaders.setLocation(redirectUri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.MOVED_PERMANENTLY);
     }
+
+    @GetMapping(value = "/short-url/{short-url-key}")
+    public ResponseEntity<ShortUrlDTO> getShortUrlInformation(
+            @PathVariable("short-url-key") String shortUrlKey
+    ) {
+        ShortUrlDTO shortUrlDTO = shortUrlService.fetchShortUrlInformation(shortUrlKey);
+        return ResponseEntity.ok(shortUrlDTO);
+    }
 }
