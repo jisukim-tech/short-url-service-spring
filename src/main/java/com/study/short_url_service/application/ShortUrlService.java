@@ -29,4 +29,15 @@ public class ShortUrlService {
 
         return shortUrlCreationResponseDTO;
     }
+
+    public String getOriginalUrl(String shortUrlKey) {
+        ShortUrl shortUrl = shortUrlRepository.find(shortUrlKey);
+        String originalUrl = shortUrl.getOriginalUrl();
+
+        shortUrl.increaseRedirectCount();
+
+        shortUrlRepository.save(shortUrl);
+
+        return originalUrl;
+    }
 }

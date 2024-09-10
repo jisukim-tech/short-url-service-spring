@@ -15,4 +15,9 @@ public class MapShortUrlRepository implements ShortUrlRepository {
     public void save(ShortUrl shortUrl) {
         shortUrls.put(shortUrl.getShortUrlKey(), shortUrl);
     }
+
+    @Override
+    public ShortUrl find(String shortUrlKey) {
+        return shortUrls.get(shortUrlKey);
+    }
 }

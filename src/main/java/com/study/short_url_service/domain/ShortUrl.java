@@ -35,4 +35,8 @@ public class ShortUrl {
 
         return shortUrlKey.toString();
     }
+
+    public void increaseRedirectCount() {
+        this.redirectCount += 1;
+    }
 }
