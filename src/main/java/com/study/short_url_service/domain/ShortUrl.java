@@ -21,6 +21,10 @@ public class ShortUrl {
         return shortUrlKey;
     }
 
+    public Long getRedirectCount() {
+        return redirectCount;
+    }
+
     public static String generateShortUrlKey() {
         final int KEY_LENGTH = 8;
         Random random = new Random();
