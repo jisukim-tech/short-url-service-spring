@@ -1,6 +1,7 @@
 package com.study.short_url_service.application;
 
 import com.study.short_url_service.domain.ShortUrl;
+import com.study.short_url_service.domain.ShortUrlNotFoundException;
 import com.study.short_url_service.domain.ShortUrlRepository;
 import com.study.short_url_service.presentation.ShortUrlCreationRequestDTO;
 import com.study.short_url_service.presentation.ShortUrlCreationResponseDTO;
@@ -33,6 +34,11 @@ public class ShortUrlService {
 
     public String getOriginalUrl(String shortUrlKey) {
         ShortUrl shortUrl = shortUrlRepository.find(shortUrlKey);
+
+        if (null == shortUrl) {
+            throw new ShortUrlNotFoundException();
+        }
+
         String originalUrl = shortUrl.getOriginalUrl();
 
         shortUrl.increaseRedirectCount();
@@ -44,6 +50,10 @@ public class ShortUrlService {
 
     public ShortUrlDTO fetchShortUrlInformation(String shortUrlKey) {
         ShortUrl shortUrl = shortUrlRepository.find(shortUrlKey);
+
+        if (null == shortUrl) {
+            throw new ShortUrlNotFoundException();
+        }
 
         ShortUrlDTO shortUrlDTO = new ShortUrlDTO(shortUrl);
 
